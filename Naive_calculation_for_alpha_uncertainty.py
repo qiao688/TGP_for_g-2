@@ -6,12 +6,23 @@ root_s = dataset[:,0]
 R_ratio = dataset[:,1]
 root_var = dataset[:,2]
 
-Kalpha = 2 * (root_s[1:] - root_s[:-1])/ (root_s[1:]*(Mz**2-root_s[1:]**2))
-print(Kalpha.shape)
+w_alpha = 0
+Calpha = []
+for i in range(859):
+    if i == 0:
+      w_alpha = 0.5 * (root_s[1] - root_s[0])
+      Calpha.append((2*alpha*(Mz**2)/(3*np.pi))*(w_alpha / (root_s[i] * (Mz**2 - root_s[i]**2))))
+    elif i == 858:
+      w_amuon = 0.5 * (root_s[858] - root_s[857])
+      Calpha.append((2*alpha*(Mz**2)/(3*np.pi))*(w_alpha / (root_s[i] * (Mz**2 - root_s[i]**2))))
+    if not i==0 and not i==858 :
+      w_alpha = 0.5 * (root_s[i+1] - root_s[i-1])
+      Calpha.append((2*alpha*(Mz**2)/(3*np.pi))*(w_alpha / (root_s[i] * (Mz**2 - root_s[i]**2))))
+Calpha_naive = np.array(Calpha).flatten()
 
-alpha_had_var = 0
-for i in range(858):
-    alpha_had_var += Kalpha[i]**2*(root_var[i]**2)
+alpha_var = 0
+for i in range(859):
+    alpha_var += Calpha_naive[i]**2*(root_var[i]**2)
     
-alpha_uncertainty = alpha*(Mz**2)/(3*np.pi)*(alpha_had_var**0.5)
+alpha_uncertainty = alpha_var**0.5
 print(alpha_uncertainty)
