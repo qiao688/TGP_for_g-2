@@ -14,18 +14,17 @@ C_had = np.load("C_had.npy")
 
 # Calculate the covariance between amuon_HVP and alpha_had
 
-Cov1 = 0
+Cov = 0
 for i in range(2575):
     for j in range(2575):
-        Cov1 += C_HVP[i] * C_had[j] * R_cov[i,j]
-Cov = ((2*alpha**2/(3*np.pi**2)) * (2*alpha*(Mz**2)/(3*np.pi)))**2 * Cov1
+        Cov += C_HVP[i] * C_had[j] * R_cov[i,j]
 print(Cov)
 
 # Calculate the correlation coefficient
 
 def Coe(root_s):
-    Cov2 = Cov
+    Cov1 = Cov
     sigma_X = amuon_uncertainty
     sigma_Y = alpha_uncertainty
-    return Cov2/(sigma_X*sigma_Y)
+    return Cov1/(sigma_X*sigma_Y)
 print(Coe(root_s))
