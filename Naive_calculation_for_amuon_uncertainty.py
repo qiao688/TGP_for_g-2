@@ -2,7 +2,7 @@ import numpy as np
 Mmuon = 105.6583755e-3 #Mass muon = 105.6583755 ± 0.0000023 MeV
 Mpion = 139.57039e-3 #Mass pion = 139.57039 ± 0.00018 MeV
 alpha = 1/137.035999084 #fine-structure constant: 7.297 352 5693(11)×10−3 = 1/137.035 999 084(21) 0.15(uncertainty)
-dataset = np.loadtxt("/home/qiaoli/GPTree/TGP/root_s(0.3-1.937).dat")
+dataset = np.loadtxt("CM_energy(0.3-1.937GeV).txt")
 root_s = dataset[:,0]
 R_ratio = dataset[:,1]
 root_var = dataset[:,2]
