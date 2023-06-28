@@ -1,17 +1,14 @@
 import numpy as np
-Mz = 91.1876 #Mass Z = 91.1876 ± 0.0021 GeV
 root_s = np.load("x_predict_TGP.npy")
-#print(root_s[1300])
-
 Cov = np.load("cov_TGP.npy")
-C_hvp = (root_s[1:] - root_s[:-1])/ (root_s[1:]*(Mz**2-root_s[1:]**2))
+C_had = np.load("C_had.npy")
 
 Vmax = 0
 n = 0
-for i in range(2574):
+for i in range(2575):
     Var = 0
-    for j in range(2574):
-        Var += C_hvp[i] * C_hvp[j] * Cov[i,j]
+    for j in range(2575):
+        Var += C_had[i] * C_had[j] * Cov[i,j]
     #print(Var)
     if Var > Vmax:
         Vmax = Var
@@ -19,3 +16,4 @@ for i in range(2574):
     else:
         continue
 print(Vmax,n)
+#print(root_s[704])
